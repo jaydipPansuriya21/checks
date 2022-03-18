@@ -11,33 +11,46 @@ Dotenv.load
 #   credentials: Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'],ENV['AWS_SECRET_ACCESS_KEY'])
 # })
 
-# client = Aws::S3::Client.new(
-#     :region => ENV['AWS_REGION'],
-#     :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-#     :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
-#   )
+client = Aws::S3::Client.new(
+    :region => ENV['AWS_REGION'],
+    :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+    :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+  )
 
+# client.get_object({
+#     response_target: './download/main.rb',
+#     bucket: "jaydip21", 
+#     key: "main.rb"
+# })
 
-s3 = Aws::S3::Resource.new(region: 'sa-east-1')
-my_bucket = s3.bucket('jaydip21')
+client.delete_object({
+    bucket: "jaydip21", 
+    key: "main.rb"
+})
+
+# s3 = Aws::S3::Resource.new(region: 'sa-east-1')
+# my_bucket = s3.bucket('jaydip21')
+# byebug
+# ob = my_bucket.object('main.rb')
+# ob.delete
 # my_bucket.create
 
 # upload file to bucket
 # name = File.basename 'main.rb'
 # obj = s3.bucket('jaydip21').object(name)
 # obj.upload_file('amzon.rb')
-
+#obj.delete
 # list all object
-my_bucket.objects.limit(50).each do |obj|
-  puts "  #{obj.key} => #{obj.etag}"
-end
+#my_bucket.objects.limit(50).each do |obj|
+#  puts "  #{obj.key} => #{obj.etag}"
+#end
 
 
 
 # download file/object 
-s3_client = Aws::S3::Client.new(region: 'sa-east-1')
-s3_client.get_object(
-  response_target: './download/1.rb',
-  bucket: 'jaydip21',
-  key: 'main.rb'
-)
+# s3_client = Aws::S3::Client.new(region: 'sa-east-1')
+# s3_client.get_object(
+#  response_target: './download/7964889a',
+#  bucket: 'jaydip21',
+#  key: '7964889a'
+# )
