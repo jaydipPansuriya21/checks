@@ -13,6 +13,10 @@ class UserController < ApplicationController
     SendWelcomeMailJob.perform_later(user1)
     CreateUserJob.perform_later(user1)
     AskInformationJob.perform_later(user1)
+
+    Delayed::Worker.logger.add('delayed_job checks..')
+    # https://stackoverflow.com/questions/14631910/logging-in-delayed-job
+    # https://stackoverflow.com/questions/6183676/delayed-job-not-logging-in-production
     render 'index'       
   end
 end
