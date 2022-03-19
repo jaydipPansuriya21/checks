@@ -13,6 +13,8 @@ Delayed::Worker.queue_attributes = {
     medium:         { priority: 5},
     low:            { priority: 10 }
   }
+Delayed::Worker.logger = Logger.new(File.join(Rails.root, 'log', 'dj.log'))
+
 # commands to start background jobs : 
 # start : bundle exec rake jobs:work
 # stop : crt + c
